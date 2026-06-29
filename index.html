@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Caveat:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght=300;400;500;600;700&family=Quicksand:wght=400;500;600;700&family=Caveat:wght=400;700&display=swap');
         
         :root {
             --font-main: 'Quicksand', sans-serif;
@@ -38,39 +38,75 @@
             box-shadow: 0 20px 40px -15px rgba(244, 63, 94, 0.1);
         }
 
-        /* Cute Polaroid Frame Styling */
+        /* Scrapbook Polaroid Frames with Entrance Physics */
         .polaroid {
             background: white;
-            padding: 12px 12px 24px 12px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.03);
+            padding: 12px 12px 20px 12px;
+            box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.02);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .polaroid:hover {
-            transform: scale(1.04) rotate(0deg) !important;
-            box-shadow: 0 15px 35px -5px rgba(244, 63, 94, 0.15);
+            opacity: 0;
+            transform: translateY(40px) scale(0.85);
+            filter: blur(4px);
         }
 
-        /* Smooth View Transitions */
+        /* Dynamic Stagger Animation Activated via active-view class */
+        .active-view .polaroid {
+            animation: polaroidSpringIn 0.7s cubic-bezier(0.34, 1.6, 0.64, 1) forwards;
+        }
+
+        @keyframes polaroidSpringIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotate(var(--scrap-tilt));
+                filter: blur(0);
+            }
+        }
+
+        .polaroid:hover {
+            transform: scale(1.06) rotate(0deg) !important;
+            box-shadow: 0 20px 35px -8px rgba(244, 63, 94, 0.18);
+            z-index: 10;
+        }
+
+        /* Cute Washi Tape Decor Component */
+        .washi-tape {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 75px;
+            height: 24px;
+            background: rgba(254, 205, 211, 0.65);
+            backdrop-filter: blur(2px);
+            border-left: 3px dashed rgba(244, 63, 94, 0.2);
+            border-right: 3px dashed rgba(244, 63, 94, 0.2);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        .polaroid:hover .washi-tape {
+            width: 95px;
+            background: rgba(254, 205, 211, 0.95);
+        }
+
+        /* Smooth Tab View Transitions */
         .app-view {
             display: none;
             opacity: 0;
-            transform: translateY(15px);
-            transition: all 0.5s ease-in-out;
+            transition: opacity 0.4s ease-in-out;
         }
 
         .app-view.active-view {
             display: block;
             opacity: 1;
-            transform: translateY(0);
         }
 
-        /* Floating Background Deco */
+        /* Floating Background Decorative Sparkles */
         .floating-sparkle {
             position: absolute;
             pointer-events: none;
             animation: floatUpDown 6s ease-in-out infinite;
-            opacity: 0.4;
+            opacity: 0.35;
         }
 
         @keyframes floatUpDown {
@@ -105,7 +141,7 @@
     </div>
 
 
-    <div id="main-dashboard" class="w-full max-w-5xl z-10 hidden opacity-0 transition-all duration-1000 flex flex-col justify-between flex-grow">
+    <div id="main-dashboard" class="w-full max-w-6xl z-10 hidden opacity-0 transition-all duration-1000 flex flex-col justify-between flex-grow">
         
         <header class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
             <div class="text-center md:text-left">
@@ -143,7 +179,7 @@
                         <p class="text-slate-600 leading-relaxed text-base md:text-lg font-medium mb-6">
                             You are an absolutely irreplaceable soul, and I hope this year brings you all the dreams, joy, and delicious pastries your heart desires!
                         </p>
-                        <p class="handwritten text-3xl text-purple-500 font-bold">Forever your favorite person, me! 💖</p>
+                        <p class="handwritten text-3xl text-purple-500 font-bold">Forever your bestfriend, varshil! </p>
                     </div>
 
                     <div class="lg:col-span-1 aesthetic-card rounded-[2.5rem] p-8 flex flex-col justify-between border-2 border-pink-300 bg-pink-50/50">
@@ -165,32 +201,107 @@
             </div>
 
             <div id="view-gallery" class="app-view">
-                <h2 class="text-2xl font-bold mb-6 text-slate-700 cute-heading flex items-center gap-3">
-                    <i class="fa-solid fa-heart text-pink-400"></i> Our Polaroid Scrapbook
-                </h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-slate-700 cute-heading flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-heart text-pink-400"></i>  Polaroid Scrapbook Grid ✨
+                    </h2>
+                    <p class="text-sm font-medium text-slate-500 mt-1">Stitched together with absolute unhinged chaos and infinite memories.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-2 max-w-6xl mx-auto">
                     
-                    <div class="polaroid rounded-sm -rotate-2 mx-auto max-w-[280px]">
-                        <div class="overflow-hidden rounded-sm aspect-square bg-slate-100 mb-3">
-                            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80" alt="Memory 1" class="w-full h-full object-cover">
+        
+
+                    <div class="polaroid relative rounded-sm mx-auto w-full max-w-[240px]" style="animation-delay: 100ms; --scrap-tilt: 2deg;">
+                        <div class="washi-tape"></div>
+                        <div class="overflow-hidden aspect-square bg-slate-100 mb-2">
+                            <img src="file:///C:/Users/Varshil%20Shah/Downloads/WhatsApp%20Image%202026-06-29%20at%202.29.32%20PM%20(1).jpeg" alt="Bestie 2" class="w-full h-full object-cover">
                         </div>
-                        <p class="handwritten text-2xl text-slate-700 text-center font-bold">Partners in crime! 💥</p>
+                        <p class="handwritten text-xl text-slate-700 text-center font-bold truncate">Always Funny</p>
                     </div>
 
-                    <div class="polaroid rounded-sm rotate-3 mx-auto max-w-[280px]">
-                        <div class="overflow-hidden rounded-sm aspect-square bg-slate-100 mb-3">
-                            <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=600&q=80" alt="Memory 2" class="w-full h-full object-cover">
+                    <div class="polaroid relative rounded-sm mx-auto w-full max-w-[240px]" style="animation-delay: 150ms; --scrap-tilt: -2.5deg;">
+                        <div class="washi-tape"></div>
+                        <div class="overflow-hidden aspect-square bg-slate-100 mb-2">
+                            <img src="file:///C:/Users/Varshil%20Shah/Downloads/WhatsApp%20Image%202026-06-29%20at%202.29.33%20PM.jpeg" alt="Bestie 3" class="w-full h-full object-cover">
                         </div>
-                        <p class="handwritten text-2xl text-slate-700 text-center font-bold">Café dates are the best ✨</p>
+                        <p class="handwritten text-xl text-slate-700 text-center font-bold truncate">Aesthetic Perosn</p>
                     </div>
 
-                    <div class="polaroid rounded-sm -rotate-1 mx-auto max-w-[280px] sm:col-span-2 lg:col-span-1">
-                        <div class="overflow-hidden rounded-sm aspect-square bg-black mb-3">
+                    <div class="polaroid relative rounded-sm mx-auto w-full max-w-[240px]" style="animation-delay: 200ms; --scrap-tilt: 1.8deg;">
+                        <div class="washi-tape"></div>
+                        <div class="overflow-hidden aspect-square bg-slate-100 mb-2">
+                            <img src="file:///C:/Users/Varshil%20Shah/Downloads/WhatsApp%20Image%202026-06-29%20at%202.29.31%20PM.jpeg" alt="Bestie 4" class="w-full h-full object-cover">
+                        </div>
+                        <p class="handwritten text-xl text-slate-700 text-center font-bold truncate">Little Queen 👑</p>
+                    </div>
+
+                    <div class="polaroid relative rounded-sm mx-auto w-full max-w-[240px]" style="animation-delay: 250ms; --scrap-tilt: -1deg;">
+                        <div class="washi-tape"></div>
+                        <div class="overflow-hidden aspect-square bg-slate-100 mb-2">
+                            <img src="file:///C:/Users/Varshil%20Shah/Downloads/WhatsApp%20Image%202026-06-29%20at%202.29.27%20PM.jpeg" alt="Bestie 5" class="w-full h-full object-cover">
+                        </div>
+                        <p class="handwritten text-xl text-slate-700 text-center font-bold truncate">Shared Braincell Status 🧠</p>
+                    </div>
+
+                    <div class="polaroid relative rounded-sm mx-auto w-full max-w-[240px]" style="animation-delay: 300ms; --scrap-tilt: 2.2deg;">
+                        <div class="washi-tape"></div>
+                        <div class="overflow-hidden aspect-square bg-slate-100 mb-2">
+                            <img src="file:///C:/Users/Varshil%20Shah/Downloads/WhatsApp%20Image%202026-06-29%20at%202.29.28%20PM.jpeg" alt="Bestie 6" class="w-full h-full object-cover">
+                        </div>
+                        <p class="handwritten text-xl text-slate-700 text-center font-bold truncate">Laughing at internal jokes 😂</p>
+                    </div>
+
+                    <div class="polaroid relative rounded-sm mx-auto w-full max-w-[240px]" style="animation-delay: 350ms; --scrap-tilt: -2deg;">
+                        <div class="washi-tape"></div>
+                        <div class="overflow-hidden aspect-square bg-slate-100 mb-2">
+                            <img src="file:///C:/Users/Varshil%20Shah/Downloads/WhatsApp%20Image%202026-06-29%20at%202.29.32%20PM.jpeg" alt="Bestie 7" class="w-full h-full object-cover">
+                        </div>
+                        <p class="handwritten text-xl text-slate-700 text-center font-bold truncate">Pure Happiness 🧸</p>
+                    </div>
+
+                    <div class="polaroid relative rounded-sm mx-auto w-full max-w-[240px]" style="animation-delay: 400ms; --scrap-tilt: 1.2deg;">
+                        <div class="washi-tape"></div>
+                        <div class="overflow-hidden aspect-square bg-slate-100 mb-2">
+                            <img src="file:///C:/Users/Varshil%20Shah/Downloads/WhatsApp%20Image%202026-06-29%20at%202.29.34%20PM.jpeg" alt="Bestie 8" class="w-full h-full object-cover">
+                        </div>
+                        <p class="handwritten text-xl text-slate-700 text-center font-bold truncate">The Main Character ✨</p>
+                    </div>
+
+                    <div class="polaroid relative rounded-sm mx-auto w-full max-w-[240px]" style="animation-delay: 450ms; --scrap-tilt: -1.8deg;">
+                        <div class="washi-tape"></div>
+                        <div class="overflow-hidden aspect-square bg-slate-100 mb-2">
+                            <img src="file:///C:/Users/Varshil%20Shah/Downloads/WhatsApp%20Image%202026-06-29%20at%202.29.35%20PM.jpeg" alt="Bestie 9" class="w-full h-full object-cover">
+                        </div>
+                        <p class="handwritten text-xl text-slate-700 text-center font-bold truncate">Manifesting Greatness 💫</p>
+                    </div>
+
+                    <div class="polaroid relative rounded-sm mx-auto w-full max-w-[240px]" style="animation-delay: 500ms; --scrap-tilt: 2.5deg;">
+                        <div class="washi-tape"></div>
+                        <div class="overflow-hidden aspect-square bg-slate-100 mb-2">
+                            <img src="file:///C:/Users/Varshil%20Shah/Downloads/WhatsApp%20Image%202026-06-29%20at%202.29.36%20PM.jpeg" alt="Bestie 10" class="w-full h-full object-cover">
+                        </div>
+                        <p class="handwritten text-xl text-slate-700 text-center font-bold truncate">Best Human Ever 🌸</p>
+                    </div>
+
+                    <div class="polaroid relative rounded-sm mx-auto w-full max-w-[240px] sm:col-span-1 md:col-span-1" style="animation-delay: 550ms; --scrap-tilt: -1.2deg;">
+                        <div class="washi-tape" style="background: rgba(192, 132, 252, 0.65);"></div>
+                        <div class="overflow-hidden aspect-square bg-black mb-2 rounded-sm shadow-inner">
                             <video controls class="w-full h-full object-cover">
-                                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                                <source src="file:///C:/Users/Varshil%20Shah/Downloads/WhatsApp%20Video%202026-06-29%20at%202.45.22%20PM.mp4" type="video/mp4">
                             </video>
                         </div>
-                        <p class="handwritten text-2xl text-slate-700 text-center font-bold">Press Play! 🎥🍿</p>
+                        <p class="handwritten text-xl text-purple-600 text-center font-bold truncate">Cutie Reel 📹✨</p>
+                    </div>
+
+                    <div class="polaroid relative rounded-sm mx-auto w-full max-w-[240px] sm:col-span-1 md:col-span-1" style="animation-delay: 600ms; --scrap-tilt: 1.5deg;">
+                        <div class="washi-tape" style="background: rgba(192, 132, 252, 0.65);"></div>
+                        <div class="overflow-hidden aspect-square bg-black mb-2 rounded-sm shadow-inner">
+                            <video controls class="w-full h-full object-cover">
+                                <source src="file:///C:/Users/Varshil%20Shah/Downloads/WhatsApp%20Video%202026-06-29%20at%202.45.43%20PM.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <p class="handwritten text-xl text-purple-600 text-center font-bold truncate">Press Play! 🍿🎥</p>
                     </div>
 
                 </div>
@@ -211,9 +322,9 @@
                             <i class="fa-solid fa-sparkles text-3xl mb-2 animate-pulse"></i>
                             <span class="text-xs font-bold cute-heading tracking-widest uppercase">Tap to Scratch ✨</span>
                         </div>
-                        <div class="text-pink-400 text-4xl mb-2"><i class="fa-solid fa-bubble-tea"></i></div>
-                        <h4 class="font-bold cute-heading text-lg text-slate-700 mb-1">Boba & Cafe Date 🧋</h4>
-                        <p class="text-xs text-slate-500 font-semibold px-2">This ticket is redeemable for one completely free iced coffee, tea, or boba date on me!</p>
+                        <div class="text-pink-400 text-4xl mb-2"><i class="fa-solid fa-cookie-bite"></i></div>
+                        <h4 class="font-bold cute-heading text-lg text-slate-700 mb-1">Golgapa Treat 🧋</h4>
+                        <p class="text-xs text-slate-500 font-semibold px-2">This ticket is redeemable for helping me in my low's,this treat is on me!</p>
                     </div>
 
                     <div class="relative overflow-hidden bg-white rounded-3xl p-6 text-center shadow-md border-2 border-dashed border-pink-200 cursor-pointer h-52 flex flex-col justify-center items-center group select-none" onclick="revealCoupon(this)">
@@ -232,7 +343,7 @@
                             <span class="text-xs font-bold cute-heading tracking-widest uppercase">Tap to Scratch ✨</span>
                         </div>
                         <div class="text-rose-400 text-4xl mb-2"><i class="fa-solid fa-ticket"></i></div>
-                        <h4 class="font-bold cute-heading text-lg text-slate-700 mb-1">Movie Night Box office 🎬</h4>
+                        <h4 class="font-bold cute-heading text-lg text-slate-700 mb-1">Movie Box office 🎬</h4>
                         <p class="text-xs text-slate-500 font-semibold px-2">Entitles you to a theater movie ticket or a cozy custom streaming setup with snacks completely covered.</p>
                     </div>
 
@@ -256,16 +367,16 @@
         </nav>
     </div>
 
-    <audio id="bg-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+    <audio id="bg-music" src="file:///C:/Users/Varshil%20Shah/Downloads/Ye-Kya-Baat-Hai-Aaj-Ki-Chandni-Me.mp3" loop></audio>
 
     <script>
         // 🔑 CONFIGURATION KEY CODES
-        const SECURE_TOKEN = "gotu"; // Set password here!
+        const SECURE_TOKEN = "gotu"; // Change password here!
 
         const compliments = [
             "Your outfits are always 10/10 and completely aesthetic. 🎀",
             "You have the absolute rarest, gold-tier sense of humor. 🍦",
-            "Thank you for listening to my 20-minute audio notes without running away. 🍯",
+            "Thank you for listening to my bakwas talks without running away. 🍯",
             "You make the most boring places feel like an absolute adventure! 🧸",
             "Factual Statement: My world is 100x happier with you in it. 💕",
             "You deserve a giant pile of cupcakes and all the happiness today! 🧁"
@@ -320,7 +431,7 @@
             if (e.key === "Enter") unlockPortal();
         });
 
-        // --- DYNAMIC TABS FUNCTION ---
+        // --- DYNAMIC TABS FUNCTION WITH RE-TRIGGER ANIMATION ---
         function switchTab(viewId, element) {
             document.querySelectorAll('.app-view').forEach(view => {
                 view.classList.remove('active-view');
@@ -329,8 +440,20 @@
                 btn.className = "nav-btn flex flex-col items-center gap-1 px-4 py-1.5 rounded-xl text-slate-400 hover:text-rose-400 font-semibold transition-all duration-300";
             });
 
-            document.getElementById(`view-${viewId}`).classList.add('active-view');
+            const activeTarget = document.getElementById(`view-${viewId}`);
+            activeTarget.classList.add('active-view');
             element.className = "nav-btn flex flex-col items-center gap-1 px-4 py-1.5 rounded-xl text-rose-500 bg-pink-100/80 font-semibold transition-all duration-300";
+
+            // If entering gallery, re-trigger staggered animations cleanly
+            if (viewId === 'gallery') {
+                const elements = activeTarget.querySelectorAll('.polaroid');
+                elements.forEach(el => {
+                    const existingAnim = el.style.animation;
+                    el.style.animation = 'none';
+                    el.offsetHeight; // Trigger DOM reflow to clear state
+                    el.style.animation = null; 
+                });
+            }
         }
 
         // --- RANDOM CANDY JAR NOTES ---
